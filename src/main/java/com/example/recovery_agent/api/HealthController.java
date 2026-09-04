@@ -31,6 +31,19 @@ public class HealthController {
         this.redis = redis;
     }
 
+    /**
+     * Lightweight health check for uptime pings (e.g. cron-job.org keep-alive).
+     * No side effects — just confirms the app is up. Safe to call frequently.
+     */
+    @GetMapping("/health")
+    public Map<String, Object> health() {
+        return Map.of(
+                "status", "UP",
+                "service", "RecoveryAgent",
+                "timestamp", Instant.now().toString()
+        );
+    }
+
     @GetMapping("/smoke-test")
     public Map<String, Object> smokeTest() {
         // 1. Fake case
@@ -61,5 +74,3 @@ public class HealthController {
         );
     }
 }
-
-
