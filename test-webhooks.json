@@ -1,0 +1,106 @@
+{
+  "README": "Use these JSON payloads in Postman to test your webhook receiver.",
+  "README2": "Send POST to http://localhost:8080/api/webhooks/razorpay/test",
+
+  "test_1_insufficient_funds": {
+    "event": "payment.failed",
+    "payload": {
+      "payment": {
+        "entity": {
+          "id": "pay_test_001",
+          "amount": 49900,
+          "currency": "INR",
+          "method": "card",
+          "merchant_id": "merchant_test",
+          "customer_id": "cust_test_001",
+          "email": "rahul@gmail.com",
+          "contact": "+919876543210",
+          "error_code": "insufficient_funds",
+          "error_description": "Your payment could not be completed due to insufficient account balance."
+        }
+      }
+    }
+  },
+
+  "test_2_card_expired": {
+    "event": "payment.failed",
+    "payload": {
+      "payment": {
+        "entity": {
+          "id": "pay_test_002",
+          "amount": 129900,
+          "currency": "INR",
+          "method": "card",
+          "merchant_id": "merchant_test",
+          "customer_id": "cust_test_002",
+          "email": "priya@gmail.com",
+          "contact": "+919876543211",
+          "error_code": "card_expired",
+          "error_description": "The card has expired. Please use another card."
+        }
+      }
+    }
+  },
+
+  "test_3_hard_decline_should_not_recover": {
+    "event": "payment.failed",
+    "payload": {
+      "payment": {
+        "entity": {
+          "id": "pay_test_003",
+          "amount": 1500000,
+          "currency": "INR",
+          "method": "card",
+          "merchant_id": "merchant_test",
+          "customer_id": "cust_test_003",
+          "email": "amit@gmail.com",
+          "contact": "+919876543212",
+          "error_code": "payment_risk_check_failed",
+          "error_description": "Payment was declined by the bank due to risk check."
+        }
+      }
+    }
+  },
+
+  "test_4_bank_downtime": {
+    "event": "payment.failed",
+    "payload": {
+      "payment": {
+        "entity": {
+          "id": "pay_test_004",
+          "amount": 59900,
+          "currency": "INR",
+          "method": "netbanking",
+          "merchant_id": "merchant_test",
+          "customer_id": "cust_test_004",
+          "email": "sneha@gmail.com",
+          "contact": "+919876543213",
+          "error_code": "bank_downtime",
+          "error_description": "The bank's servers are temporarily unavailable."
+        }
+      }
+    }
+  },
+
+  "test_5_subscription_failed": {
+    "event": "subscription.pending",
+    "payload": {
+      "subscription": {
+        "entity": {
+          "id": "sub_test_001",
+          "merchant_id": "merchant_test",
+          "customer_id": "cust_test_005"
+        }
+      },
+      "payment": {
+        "entity": {
+          "id": "pay_test_005",
+          "amount": 99900,
+          "currency": "INR",
+          "error_code": "card_expired",
+          "error_description": "The card used for the subscription has expired."
+        }
+      }
+    }
+  }
+}

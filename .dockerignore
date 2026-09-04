@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Java build output (rebuilt inside Docker)
+target/
+
+# Frontend node_modules (reinstalled inside Docker)
+frontend/node_modules/
+frontend/dist/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Environment files (secrets — never bake into image)
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (prevent recursive build)
+docker-compose.yml

@@ -67,7 +67,7 @@ function Penny() {
     setIsLoading(true);
 
     try {
-      // Build conversation history 
+      // Build conversation history
       const history = messages
         .filter((m) => m.role === "user" || m.role === "assistant")
         .map((m) => ({ role: m.role, content: m.content }));
@@ -89,6 +89,7 @@ function Penny() {
           role: "assistant",
           content: reply,
           timestamp: new Date(),
+          quotaExceeded: response.data.quotaExceeded === true,
         },
       ]);
     } catch (error) {
@@ -125,6 +126,7 @@ function Penny() {
   };
 
   const suggestions = currentCaseId ? CASE_SUGGESTIONS : SUGGESTIONS;
+  const isQuotaExceeded = messages.some((m) => m.quotaExceeded);
 
   return (
     <>
@@ -188,29 +190,51 @@ function Penny() {
                 key={i}
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
-                <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
-                    msg.role === "user"
-                      ? "bg-violet-600 text-white rounded-br-md"
-                      : "bg-gray-100 text-gray-800 rounded-bl-md"
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                    {msg.content}
-                  </p>
-                  <p
-                    className={`text-[10px] mt-1 ${
-                      msg.role === "user" ? "text-violet-200" : "text-gray-400"
+                {/* Quota exceeded — special card */}
+                {msg.quotaExceeded ? (
+                  <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-amber-200 bg-amber-50 px-4 py-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-lg">🪫</span>
+                      <p className="text-sm font-semibold text-amber-800">
+                        Penny's out of juice for today
+                      </p>
+                    </div>
+                    <p className="text-xs text-amber-700 leading-relaxed whitespace-pre-wrap">
+                      {msg.content}
+                    </p>
+                    <div className="mt-2 pt-2 border-t border-amber-200">
+                      <p className="text-[10px] text-amber-500">
+                        🔄 Resets daily · Free tier: 20 requests/day
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
+                      msg.role === "user"
+                        ? "bg-violet-600 text-white rounded-br-md"
+                        : "bg-gray-100 text-gray-800 rounded-bl-md"
                     }`}
                   >
-                    {msg.timestamp
-                      ? new Date(msg.timestamp).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      : ""}
-                  </p>
-                </div>
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                      {msg.content}
+                    </p>
+                    <p
+                      className={`text-[10px] mt-1 ${
+                        msg.role === "user"
+                          ? "text-violet-200"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {msg.timestamp
+                        ? new Date(msg.timestamp).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : ""}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
 
@@ -263,15 +287,19 @@ function Penny() {
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => !isQuotaExceeded && setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask Penny anything..."
-              disabled={isLoading}
-              className="flex-1 text-sm bg-gray-50 border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-transparent disabled:opacity-50"
+              placeholder={
+                isQuotaExceeded
+                  ? "Penny is resting — back tomorrow 🌙"
+                  : "Ask Penny anything..."
+              }
+              disabled={isLoading || isQuotaExceeded}
+              className="flex-1 text-sm bg-gray-50 border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
               onClick={() => sendMessage(input)}
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || isQuotaExceeded}
               className="w-9 h-9 bg-violet-600 text-white rounded-full flex items-center justify-center hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex-shrink-0"
             >
               {isLoading ? (
@@ -288,5 +316,3 @@ function Penny() {
 }
 
 export default Penny;
-
-
