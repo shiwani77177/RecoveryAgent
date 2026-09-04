@@ -20,6 +20,10 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 
+# Make the Maven wrapper executable — Git on Windows can strip the +x bit,
+# which makes Render's strict Linux build fail with "Permission denied".
+RUN chmod +x mvnw
+
 RUN ./mvnw dependency:go-offline
 
 COPY src src
