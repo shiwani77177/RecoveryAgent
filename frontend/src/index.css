@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+/* ═══ Global cursor behaviour ═══
+   Every button, nav link, and interactive element shows the pointer
+   cursor on hover. Disabled elements revert to not-allowed.
+   This covers: Run Orchestrator, Generate Test Data, Run Evaluation,
+   Verify SHA-256, actor/filter buttons, Light mode, Sign out, Penny,
+   and anything else clickable — without touching every individual file. */
+button,
+[role="button"],
+a,
+select,
+label[for],
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+}
+
 /* ═══ Theme Variables ═══ */
 :root {
   --bg-primary: #f8fafc;
