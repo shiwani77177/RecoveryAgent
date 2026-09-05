@@ -46,9 +46,9 @@ RecoveryAgent is an autonomous agent that does exactly this across **four revenu
 | :---: | :---: |
 | ![Recovery Rate Chart](Screenshots/Evaluation%20Results.png) | ![Per-Case Breakdown](Screenshots/Profile.png) |
 
-| Tamper-Proof Audit Log | Penny Chatbot |
-| :---: | :---: |
-| ![Audit Log](Screenshots/Audit%20Log.png) | ![Penny Chatbot](Screenshots/Penny%20chatbot.png) |
+| Tamper-Proof Audit Log
+| :---:
+| ![Audit Log](Screenshots/Audit%20Log.png)
 
 ---
 
