@@ -1,3 +1,5 @@
+@'
+
 # Architectural Decisions & System Design (`decisions.md`)
 
 ## 1. System Architecture & Principle
@@ -5,29 +7,43 @@
 **Core Design Principle:** _"LLM proposes, deterministic gated code disposes."_
 The recovery platform separates non-deterministic AI diagnosis from deterministic execution. The AI agent acts purely as an advisor that suggests recovery interventions and root causes, while hardcoded, testable guardrail code evaluates policy constraints and performs state transitions.
 
-[ Webhook / Event Source ]
++-----------------------------------------------------------------+
+| Webhook / Event Source |
++-----------------------------------------------------------------+
 │
 ▼
-[ Webhook Verification (HMAC-SHA256) ]
++-----------------------------------------------------------------+
+| Webhook Verification (HMAC-SHA256) |
++-----------------------------------------------------------------+
 │
 ▼
-[ Recovery Orchestrator ]
-│
-├──▶ [ Diagnosis Engine ] ──▶ (Gemini AI / Rule-based Fallback)
-│ │
-│ ▼
-├──▶ [ Guardrail Service ] ◀── [ Recommended Action ]
-│ │
-│ ├── Daily Spend Cap
-│ ├── Idempotency Check (Redis)
-│ └── Contact Rate Limits
-│ │
-│ ▼
-├──▶ [ Intervention Executor ] ──▶ (Smart Retry / Payment Link / UPI / WhatsApp)
++-----------------------------------------------------------------+
+| Recovery Orchestrator |
++-----------------------------------------------------------------+
 │ │
 ▼ ▼
-[ Append-Only Audit Log ] ◀───────────────────────┘
-(SHA-256 Tamper-Evident)
++---------------------+ +----------------------+
+| Diagnosis Engine | | Guardrail Service |
++---------------------+ +----------------------+
+│ │
+▼ ├── Daily Spend Cap
+(Gemini AI / Fallback) ├── Idempotency (Redis)
+│ └── Contact Rate Limits
+▼ │
++---------------------+ │
+| Recommended Action |───────────────────────────────┘
++---------------------+
+│
+▼
++-----------------------------------------------------------------+
+| Intervention Executor |
+| (Smart Retry / Payment Link / UPI / WhatsApp) |
++-----------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------+
+| Append-Only Audit Log (SHA-256) |
++-----------------------------------------------------------------+
 
 ---
 
@@ -46,29 +62,35 @@ The recovery platform separates non-deterministic AI diagnosis from deterministi
 
 Each recovery case moves strictly through defined state transitions governed by stopping rules and guardrail execution outcomes.
 
-┌─────────────────┐
-│ DETECTED │
-└────────┬────────┘
++-------------------+
+| DETECTED |
++---------+---------+
 │
 ▼
-┌─────────────────┐
-│ DIAGNOSING │
-└────────┬────────┘
++-------------------+
+| DIAGNOSING |
++---------+---------+
 │
 ▼
-┌─────────────────┐ Guardrail Pass ┌─────────────────┐
-│ EXECUTING ├───────────────────────────►│ RECOVERED │
-└────┬──────┬─────┘ └─────────────────┘
-│ │
-│ │ Retry Limit / Rate Exceeded
-│ └─────────────────────────────────►┌─────────────────┐
-│ │ WAITING │
-│ Unrecoverable / Fraud Flagged └────────┬────────┘
-└────────────────────────────────┐ │ Max Backoff Reached
-▼ ▼
-┌─────────────────┐┌─────────────────┐
-│ ESCALATED ││ ABANDONED │
-└─────────────────┘└─────────────────┘
++-------------------+
+| EXECUTING |
++----+----+----+----+
+│ │ │
+Guardrail Passed │ │ │ Unrecoverable / Fraud
+│ │ └─────────────────────────────┐
+│ │ │
+│ │ Retry Limit Exceeded │
+│ └──────────────┐ │
+▼ ▼ ▼
++-------------------+ +-------------------+ +--------------+
+| RECOVERED | | WAITING | | ESCALATED |
++-------------------+ +--------+----------+ +--------------+
+│
+│ Max Backoff Reached
+▼
++-------------------+
+| ABANDONED |
++-------------------+
 
 ---
 
@@ -90,3 +112,4 @@ When a transaction or invoice fails, the engine cascades through recovery rails 
 - **Idempotency Guarantees:** Enforces key locks (`idempotency:{case_id}:{action}`) in Redis to eliminate duplicate charges or redundant customer notifications.
 - **Contact Rate Limiting:** Enforces maximum per-customer communication thresholds over rolling 24-hour windows.
 - **Financial Spend Caps:** Implements hard daily limits on automated retry amounts and promotional recovery incentives.
+  '@ | Out-File -FilePath "docs\decisions.md" -Encoding utf8
