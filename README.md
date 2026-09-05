@@ -30,25 +30,25 @@ RecoveryAgent is an autonomous agent that does exactly this across **four revenu
 
 ## 📸 Screenshots
 
-|                     Sign In                      |                     Sign Up                      |
-| :----------------------------------------------: | :----------------------------------------------: |
-| ![Sign In](Screenshots/Sign in.png) | ![Sign Up](Screenshot%202026-09-05%20125735.jpg) |
+| Sign In | Sign Up |
+| :---: | :---: |
+| ![Sign In](Screenshots/Sign%20in.jpg) | ![Sign Up](Screenshots/Sign%20up.jpg) |
 
-|                     Dashboard                      |                     All Cases                      |
-| :------------------------------------------------: | :------------------------------------------------: |
-| ![Dashboard](Screenshot%202026-09-05%20125326.png) | ![All Cases](Screenshot%202026-09-05%20125405.png) |
+| Dashboard | All Cases |
+| :---: | :---: |
+| ![Dashboard](Screenshots/Dashboard.png) | ![All Cases](Screenshots/Cases.png) |
 
-|                     Evaluation Streaming                      |             Evaluation Metrics & Quota Warning              |
-| :-----------------------------------------------------------: | :---------------------------------------------------------: |
-| ![Evaluation Streaming](Screenshot%202026-09-05%20125431.png) | ![Evaluation Metrics](Screenshot%202026-09-05%20125542.png) |
+| Evaluation Streaming | Evaluation Metrics & Quota Warning |
+| :---: | :---: |
+| ![Evaluation Streaming](Screenshots/Metrices%20Evaluation.png) | ![Evaluation Metrics](Screenshots/Evaluation%20Completed.png) |
 
-|                Recovery Rate Comparison Chart                |                 Per-Case Metrics Breakdown                  |
-| :----------------------------------------------------------: | :---------------------------------------------------------: |
-| ![Recovery Rate Chart](Screenshot%202026-09-05%20125602.png) | ![Per-Case Breakdown](Screenshot%202026-09-05%20125630.png) |
+| Recovery Rate Comparison Chart | Per-Case Metrics Breakdown |
+| :---: | :---: |
+| ![Recovery Rate Chart](Screenshots/Evaluation%20Results.png) | ![Per-Case Breakdown](Screenshots/Profile.png) |
 
-|               Tamper-Proof Audit Log               |
-| :------------------------------------------------: |
-| ![Audit Log](Screenshot%202026-09-05%20125642.png) |
+| Tamper-Proof Audit Log | Penny Chatbot |
+| :---: | :---: |
+| ![Audit Log](Screenshots/Audit%20Log.png) | ![Penny Chatbot](Screenshots/Penny%20chatbot.png) |
 
 ---
 
