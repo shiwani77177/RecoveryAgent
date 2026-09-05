@@ -143,6 +143,10 @@ The evaluation is the heart of the project — it proves the agent adds value, n
 
 Built-in conversational assistant powered by Gemini that answers questions about the dashboard, recovery strategies, and system behavior. Gracefully shows a "quota exhausted" card when the API limit is reached.
 
+<div align="center">
+  <img src="Screenshots/Penny%20chatbot.png" alt="Penny AI Recovery Assistant Chatbot" width="800" />
+</div>
+
 ---
 
 ### 🎨 Modern UI/UX
