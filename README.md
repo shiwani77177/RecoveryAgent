@@ -12,9 +12,9 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)]()
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)]()
 
-*Detect revenue at risk → Diagnose the root cause → Choose the right intervention → Recover the money*
+_Detect revenue at risk → Diagnose the root cause → Choose the right intervention → Recover the money_
 
-*With compliant escalation, stopping rules, and a tamper-proof audit trail.*
+_With compliant escalation, stopping rules, and a tamper-proof audit trail._
 
 </div>
 
@@ -22,7 +22,7 @@
 
 ## 📌 The Problem
 
-Revenue loss rarely happens in one clean step. A payment degrades, a checkout gets abandoned, a subscription mandate fails, or a B2B invoice goes overdue. Most recovery tools stop at *detecting* the problem. The hard part — and where the money actually is — is **closing the loop**: diagnosing *why* it failed, deciding *how* to intervene, executing that intervention safely, and knowing when to *stop*.
+Revenue loss rarely happens in one clean step. A payment degrades, a checkout gets abandoned, a subscription mandate fails, or a B2B invoice goes overdue. Most recovery tools stop at _detecting_ the problem. The hard part — and where the money actually is — is **closing the loop**: diagnosing _why_ it failed, deciding _how_ to intervene, executing that intervention safely, and knowing when to _stop_.
 
 RecoveryAgent is an autonomous agent that does exactly this across **four revenue-loss scenarios**, and — critically — **measures how much money it recovered that a naive strategy would have missed.**
 
@@ -64,26 +64,26 @@ The AI diagnoses and recommends. It never touches money directly. Every action p
 
 Measured across a batch of **100 synthetic cases** spanning all four revenue-loss scenarios:
 
-| Metric | Naive Baseline | RecoveryAgent | Improvement |
-| --- | --- | --- | --- |
-| Recovery Rate | 35% | ~69% | **+98%** |
-| Escalates fraud/risk correctly | ✗ retries blindly | ✓ auto-escalates | — |
-| Wasted effort on blocked cards | High | Near-zero | — |
+| Metric                         | Naive Baseline    | RecoveryAgent    | Improvement |
+| ------------------------------ | ----------------- | ---------------- | ----------- |
+| Recovery Rate                  | 35%               | ~69%             | **+98%**    |
+| Escalates fraud/risk correctly | ✗ retries blindly | ✓ auto-escalates | —           |
+| Wasted effort on blocked cards | High              | Near-zero        | —           |
 
 ---
 
 ## ✅ Track Requirements — Fully Met
 
-| The Bar | How RecoveryAgent Meets It |
-| --- | --- |
-| 🔍 **Detects revenue at risk** | Razorpay webhook receiver (`payment.failed`, `subscription.pending`) + detection across 4 scenarios |
-| 🧠 **Determines the right intervention** | Gemini AI diagnosis per error-code + attempt number, with deterministic rule fallback |
-| ⚙️ **Executes a bounded workflow** | State machine: `DETECTED → DIAGNOSING → EXECUTING → RECOVERED / ESCALATED / ABANDONED` |
-| 💳 **Payment failures + checkout + receivables** | `FAILED_PAYMENT`, `ABANDONED_CHECKOUT`, `OVERDUE_INVOICE`, `FAILED_SUBSCRIPTION` |
-| 📈 **Measured money recovered** | Eval harness: agent vs baseline, per-case grading (TP/TN/FP/FN), ₹ recovered |
-| 🚨 **Compliant escalation** | Low-confidence + fraud/risk cases → auto-escalate to human |
-| 🛑 **Stopping rules** | Max 4 attempts, exponential backoff, terminal `ABANDONED` state |
-| 📋 **Audit trail** | Append-only log with SHA-256 per-row integrity hashes + one-click verification |
+| The Bar                                          | How RecoveryAgent Meets It                                                                          |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| 🔍 **Detects revenue at risk**                   | Razorpay webhook receiver (`payment.failed`, `subscription.pending`) + detection across 4 scenarios |
+| 🧠 **Determines the right intervention**         | Gemini AI diagnosis per error-code + attempt number, with deterministic rule fallback               |
+| ⚙️ **Executes a bounded workflow**               | State machine: `DETECTED → DIAGNOSING → EXECUTING → RECOVERED / ESCALATED / ABANDONED`              |
+| 💳 **Payment failures + checkout + receivables** | `FAILED_PAYMENT`, `ABANDONED_CHECKOUT`, `OVERDUE_INVOICE`, `FAILED_SUBSCRIPTION`                    |
+| 📈 **Measured money recovered**                  | Eval harness: agent vs baseline, per-case grading (TP/TN/FP/FN), ₹ recovered                        |
+| 🚨 **Compliant escalation**                      | Low-confidence + fraud/risk cases → auto-escalate to human                                          |
+| 🛑 **Stopping rules**                            | Max 4 attempts, exponential backoff, terminal `ABANDONED` state                                     |
+| 📋 **Audit trail**                               | Append-only log with SHA-256 per-row integrity hashes + one-click verification                      |
 
 ---
 
@@ -117,13 +117,13 @@ Rail 4  →  WHATSAPP_LINK    last resort — WhatsApp has ~98% open rate
 
 ### 🔐 Security & Compliance
 
-| Feature | Implementation |
-| --- | --- |
-| 🔑 **HMAC-SHA256 Webhook Verification** | Every incoming Razorpay webhook signature is validated before processing |
-| 🛡️ **Guardrails Before Money Moves** | Daily spend cap · Redis-backed idempotency · Per-customer contact rate limit (3/day) |
-| 🔒 **JWT Authentication** | BCrypt password hashing · 1-year token expiry · Stateless sessions |
-| 🧾 **Tamper-Proof Audit Trail** | `SHA-256(id · caseId · actor · action · reason · createdAt)` per row |
-| ✅ **One-Click Integrity Check** | "Verify SHA-256 Integrity" button recomputes all hashes and flags mismatches |
+| Feature                                 | Implementation                                                                       |
+| --------------------------------------- | ------------------------------------------------------------------------------------ |
+| 🔑 **HMAC-SHA256 Webhook Verification** | Every incoming Razorpay webhook signature is validated before processing             |
+| 🛡️ **Guardrails Before Money Moves**    | Daily spend cap · Redis-backed idempotency · Per-customer contact rate limit (3/day) |
+| 🔒 **JWT Authentication**               | BCrypt password hashing · 1-year token expiry · Stateless sessions                   |
+| 🧾 **Tamper-Proof Audit Trail**         | `SHA-256(id · caseId · actor · action · reason · createdAt)` per row                 |
+| ✅ **One-Click Integrity Check**        | "Verify SHA-256 Integrity" button recomputes all hashes and flags mismatches         |
 
 ---
 
@@ -186,17 +186,17 @@ Built-in conversational assistant powered by Gemini that answers questions about
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-| --- | --- |
-| **Backend** | Spring Boot 4.1.1 · Java 17 · Maven |
-| **Frontend** | React 18 · Vite · TailwindCSS · Framer Motion |
-| **Database** | PostgreSQL 13 · Flyway migrations |
-| **Cache** | Redis (idempotency, rate limiting, backoff) |
-| **AI** | Google Gemini (`gemini-3.6-flash`) |
-| **Payments** | Razorpay Test Mode APIs (Payment Links) |
-| **Auth** | JWT · BCrypt · Stateless sessions |
-| **Infra** | Docker Compose · Multi-stage Dockerfile |
-| **Deployment** | Render (Web Service + Postgres + Redis) |
+| Layer          | Technology                                    |
+| -------------- | --------------------------------------------- |
+| **Backend**    | Spring Boot 4.1.1 · Java 17 · Maven           |
+| **Frontend**   | React 18 · Vite · TailwindCSS · Framer Motion |
+| **Database**   | PostgreSQL 13 · Flyway migrations             |
+| **Cache**      | Redis (idempotency, rate limiting, backoff)   |
+| **AI**         | Google Gemini (`gemini-3.6-flash`)            |
+| **Payments**   | Razorpay Test Mode APIs (Payment Links)       |
+| **Auth**       | JWT · BCrypt · Stateless sessions             |
+| **Infra**      | Docker Compose · Multi-stage Dockerfile       |
+| **Deployment** | Render (Web Service + Postgres + Redis)       |
 
 ---
 
@@ -224,7 +224,7 @@ docker compose up --build
 1. 📝 **Register** an account → complete the one-step payout setup
 2. 📊 Go to **Metrics** → click **Generate Test Data** (creates 100 cases across 4 scenarios)
 3. ▶️ Click **Run Evaluation** → watch the live progress stream
-4. 📋 Explore **Dashboard**, **Cases**, and **Audit Log** (try the *Verify SHA-256 Integrity* button)
+4. 📋 Explore **Dashboard**, **Cases**, and **Audit Log** (try the _Verify SHA-256 Integrity_ button)
 
 ---
 
@@ -263,24 +263,24 @@ RecoveryBot/
 
 ## 📚 Documentation
 
-| Document | Contents |
-| --- | --- |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Full system design, component flow, data model |
-| [`docs/EVAL.md`](docs/EVAL.md) | Evaluation methodology and grading criteria |
-| [`docs/SECURITY.md`](docs/SECURITY.md) | HMAC verification, guardrails, audit integrity |
-| [`docs/JUDGE_DEFENSE.md`](docs/JUDGE_DEFENSE.md) | Anticipated questions and honest answers |
+| Document                                         | Contents                                       |
+| ------------------------------------------------ | ---------------------------------------------- |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)   | Full system design, component flow, data model |
+| [`docs/EVAL.md`](docs/EVAL.md)                   | Evaluation methodology and grading criteria    |
+| [`docs/SECURITY.md`](docs/SECURITY.md)           | HMAC verification, guardrails, audit integrity |
+| [`docs/JUDGE_DEFENSE.md`](docs/JUDGE_DEFENSE.md) | Anticipated questions and honest answers       |
 
 ---
 
 ## 💡 Design Decisions
 
-| Decision | Why |
-| --- | --- |
-| **Rule fallback over pure AI** | Gemini has a 20/day free limit. The agent must work reliably 24/7, not just when quota is available. |
-| **Circuit breaker on API quota** | Detects daily exhaustion on the first 429, skips all further AI calls instantly — eval stays fast. |
-| **SHA-256 audit hashes** | Financial compliance requires tamper evidence. A one-click verify button proves no row was altered. |
+| Decision                         | Why                                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Rule fallback over pure AI**   | Gemini has a 20/day free limit. The agent must work reliably 24/7, not just when quota is available.          |
+| **Circuit breaker on API quota** | Detects daily exhaustion on the first 429, skips all further AI calls instantly — eval stays fast.            |
+| **SHA-256 audit hashes**         | Financial compliance requires tamper evidence. A one-click verify button proves no row was altered.           |
 | **Multi-rail over single retry** | A card-expired failure won't fix itself on retry. Switching to UPI or WhatsApp actually reaches the customer. |
-| **SSE over polling for eval** | Real-time progress streaming gives judges (and users) confidence the system is working, not hanging. |
+| **SSE over polling for eval**    | Real-time progress streaming gives judges (and users) confidence the system is working, not hanging.          |
 
 ---
 
@@ -299,7 +299,7 @@ RecoveryBot/
 
 **Track 03 — AI Revenue Recovery**
 
-*Detect · Diagnose · Intervene · Recover — safely, measurably, and with a full audit trail.*
+_Detect · Diagnose · Intervene · Recover — safely, measurably, and with a full audit trail._
 
 [![GitHub](https://img.shields.io/badge/GitHub-shiwani77177/RecoveryBot-181717?style=for-the-badge&logo=github)](https://github.com/shiwani77177/RecoveryBot)
 [![Live](https://img.shields.io/badge/Live-recoverybot--i0cg.onrender.com-violet?style=for-the-badge)](https://recoverybot-i0cg.onrender.com)
