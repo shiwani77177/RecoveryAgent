@@ -28,6 +28,30 @@ RecoveryAgent is an autonomous agent that does exactly this across **four revenu
 
 ---
 
+## 📸 Screenshots
+
+|                     Sign In                      |                     Sign Up                      |
+| :----------------------------------------------: | :----------------------------------------------: |
+| ![Sign In](Screenshot%202026-09-05%20125303.jpg) | ![Sign Up](Screenshot%202026-09-05%20125735.jpg) |
+
+|                     Dashboard                      |                     All Cases                      |
+| :------------------------------------------------: | :------------------------------------------------: |
+| ![Dashboard](Screenshot%202026-09-05%20125326.png) | ![All Cases](Screenshot%202026-09-05%20125405.png) |
+
+|                     Evaluation Streaming                      |             Evaluation Metrics & Quota Warning              |
+| :-----------------------------------------------------------: | :---------------------------------------------------------: |
+| ![Evaluation Streaming](Screenshot%202026-09-05%20125431.png) | ![Evaluation Metrics](Screenshot%202026-09-05%20125542.png) |
+
+|                Recovery Rate Comparison Chart                |                 Per-Case Metrics Breakdown                  |
+| :----------------------------------------------------------: | :---------------------------------------------------------: |
+| ![Recovery Rate Chart](Screenshot%202026-09-05%20125602.png) | ![Per-Case Breakdown](Screenshot%202026-09-05%20125630.png) |
+
+|               Tamper-Proof Audit Log               |
+| :------------------------------------------------: |
+| ![Audit Log](Screenshot%202026-09-05%20125642.png) |
+
+---
+
 ## 🧠 Core Philosophy
 
 > **The LLM proposes, deterministic gated code disposes.**
