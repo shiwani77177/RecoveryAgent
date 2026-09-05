@@ -32,7 +32,7 @@ RecoveryAgent is an autonomous agent that does exactly this across **four revenu
 
 | Sign In | Sign Up |
 | :---: | :---: |
-| ![Sign In](Screenshots/Sign%20in.jpg) | ![Sign Up](Screenshots/Sign%20up.jpg) |
+| ![Sign In](Screenshots/Sign%20in.png) | ![Sign Up](Screenshots/Sign%20up.png) |
 
 | Dashboard | All Cases |
 | :---: | :---: |
