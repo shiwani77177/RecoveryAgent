@@ -46,9 +46,9 @@ RecoveryAgent is an autonomous agent that does exactly this across **four revenu
 | :---: | :---: |
 | ![Recovery Rate Chart](Screenshots/Evaluation%20Results.png) | ![Per-Case Breakdown](Screenshots/Profile.png) |
 
-| Tamper-Proof Audit Log
-| :---:
-| ![Audit Log](Screenshots/Audit%20Log.png)
+| Tamper-Proof Audit Log |
+| :---: |
+| ![Audit Log](Screenshots/Audit%20Log.png) |
 
 ---
 
