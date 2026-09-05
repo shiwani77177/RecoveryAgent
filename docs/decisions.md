@@ -28,8 +28,13 @@ Intervention Executor (Smart Retry / Payment Link / UPI / WhatsApp)
           │
           ▼
 Append-Only Audit Log 🔒 (SHA-256 Tamper-Evident)
+<<<<<<< Updated upstream
 
 ```
+=======
+
+
+>>>>>>> Stashed changes
 
 ## 2. Key Architecture Decisions & Trade-Offs
 
@@ -47,6 +52,7 @@ Append-Only Audit Log 🔒 (SHA-256 Tamper-Evident)
 
 Each recovery case moves strictly through defined state transitions governed by stopping rules and guardrail execution outcomes.
 
+<<<<<<< Updated upstream
 ```text
 
 DETECTED ──► DIAGNOSING ──► EXECUTING ──► RECOVERED ✅
@@ -62,6 +68,21 @@ DETECTED ──► DIAGNOSING ──► EXECUTING ──► RECOVERED ✅
                              ABANDONED ❌
 
 ```
+=======
+DETECTED ──► DIAGNOSING ──► EXECUTING ──► RECOVERED ✅
+                  │              │
+           (low confidence)   (failed)
+                  │              │
+                  ▼              ▼
+              ESCALATED ⚠️    WAITING ──► backoff expires ──► DIAGNOSING
+                                 │
+                          (max 4 attempts)
+                                 │
+                                 ▼
+                             ABANDONED ❌
+
+
+>>>>>>> Stashed changes
 
 ## 4. Multi-Rail Recovery Strategy
 
@@ -82,5 +103,9 @@ When a transaction or invoice fails, the engine cascades through recovery rails 
 - **Contact Rate Limiting:** Enforces maximum per-customer communication thresholds over rolling 24-hour windows.
 - **Financial Spend Caps:** Implements hard daily limits on automated retry amounts and promotional recovery incentives.
   '@ | Out-File -FilePath "docs\decisions.md" -Encoding utf8
+<<<<<<< Updated upstream
 
+=======
+```
+>>>>>>> Stashed changes
 
